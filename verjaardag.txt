@@ -1,0 +1,25 @@
+OM TE BEGINNEN 
+- onderzoek wat je nodig heb en zet het in deze notitie
+
+WAT HEB JE NODIG
+- pygame 
+- pygbag
+
+STAPEN-pygame
+- Maak pygame venster
+- Maak achtergrond
+- Maak button
+- Importeer mp3 bestanden
+- Button en mp3 linken
+- RUN
+- Werkt het? ja Geef het cadeau Nee verbeter het!
+
+STAPPEN-PYGBAG
+- Zoek nog eens informatie op
+- Importeer pygbag
+- Zorg dat het werkt
+- RUN
+- Werkt het? ja Geef het cadau Nee verbeter het!
+
+
+
