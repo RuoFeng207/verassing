@@ -1,5 +1,10 @@
 import pygame
 import sys
+import time
+pygame.init()
+pygame.mixer.init()
+
+
 
 
 def teken_knop(scherm, tekst, x, y, breedte, hoogte, kleur, kleur_tekst, uitlijn):
@@ -37,9 +42,6 @@ def tekst(scherm, tekst, x, y, kleur_tekst):
     # Teken de tekst op het scherm
     scherm.blit(tekst_opmaak, tekst_rect)
 
-pygame.init()
-
-
 
 # kleur
 rood = 255, 0, 0
@@ -55,7 +57,10 @@ pygame.display.set_caption("Verjaardag")
 # achtergrond laden
 achtergrond = pygame.image.load("party_background.jpg")
 achtergrond = pygame.transform.scale(achtergrond, (600, 600))
-
+# muziek
+sound1 = pygame.mixer.Sound("er_is_er_een_jarig.mp3")
+sound2 = pygame.mixer.Sound("gefeliciteerd.mp3")
+sound3 = pygame.mixer.Sound("lang_zal_hij_leven.mp3")
 # main loop en eventhandler
 while True:
     #cur_pos
@@ -63,19 +68,21 @@ while True:
     for event in pygame.event.get():     
         # Controleer of de muis op de knop is geklikt         
         if event.type==pygame.MOUSEBUTTONDOWN: 
-            if knop1.collidepoint(cur):  
-                print("Knop brief is ingedrukt!")
-            if knop2.collidepoint(cur):  
-                print("Knop play is ingedrukt!")
-            if knop3.collidepoint(cur): 
-                print("Knop afsluiten is ingedrukt!")
+            if knop1.collidepoint(cur):   #muziek
+                sound1.play()
+                time.sleep(26)
+                sound2.play()
+                time.sleep(32)
+                sound3.play()
+                time.sleep(1)
+            if knop2.collidepoint(cur): #afsluiten
+                print("Bedankt voor het luisteren!")
+                quit()
 
         if event.type ==pygame.MOUSEBUTTONUP:
             if knop1.collidepoint(cur):  
-                print("Knop brief is losgelaten!")
-            if knop2.collidepoint(cur):  
                 print("Knop play is losgelaten!")
-            if knop3.collidepoint(cur): 
+            if knop2.collidepoint(cur): 
                 print("Knop afsluiten is losgelaten!")
                     
         if event.type == pygame.QUIT:
@@ -84,27 +91,23 @@ while True:
 
     # Teken achtergrond
     scherm.blit(achtergrond, (0, 0))
-    tekst(scherm, "gefeliciteerd", scherm_breete // 2, 230, zwart) 
+    tekst(scherm, "gefeliciteerd", scherm_breete // 2, 330, zwart) 
     # Teken de knoppen
 
-    #knop1
-    if (scherm_breete - 150) // 2 < cur[0] < (scherm_breete - 150) // 2 + 150 and 330 < cur[1] < 330 + 50:
-
-        knop1=teken_knop(scherm, "Brief", (scherm_breete - 150) // 2, 330, 150, 50, lichtrood, wit, zwart)
-    else:
-        knop1=teken_knop(scherm, "Brief", (scherm_breete - 150) // 2, 330, 150, 50, rood, wit, zwart)
-        #knop2
+         
+        #knop1
     if (scherm_breete - 150) // 2 < cur[0] < (scherm_breete - 150) // 2 + 150 and 400 < cur[1] < 400 + 50:
 
-        knop2=teken_knop(scherm, "Play", (scherm_breete - 150) // 2, 400, 150, 50, lichtrood, wit,zwart)
+        knop1=teken_knop(scherm, "Play", (scherm_breete - 150) // 2, 400, 150, 50, lichtrood, wit,zwart)
     else:
-        knop2=teken_knop(scherm, "Play", (scherm_breete - 150) // 2, 400, 150, 50, rood, wit,zwart)
-        #knop 3
+        knop1=teken_knop(scherm, "Play", (scherm_breete - 150) // 2, 400, 150, 50, rood, wit,zwart)
+
+        #knop 2
     if (scherm_breete - 150) // 2 < cur[0] < (scherm_breete - 150) // 2 + 150 and 470 < cur[1] < 470 + 50:
-        knop3=teken_knop(scherm, "Afsluiten", (scherm_breete - 150) // 2, 470, 150, 50, lichtrood, wit,zwart)
+        knop2=teken_knop(scherm, "Afsluiten", (scherm_breete - 150) // 2, 470, 150, 50, lichtrood, wit,zwart)
     
     else:
-        knop3=teken_knop(scherm, "Afsluiten", (scherm_breete - 150) // 2, 470, 150, 50, rood, wit,zwart)
+        knop2=teken_knop(scherm, "Afsluiten", (scherm_breete - 150) // 2, 470, 150, 50, rood, wit,zwart)
 
 
 

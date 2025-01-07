@@ -6,20 +6,22 @@ WAT HEB JE NODIG
 - pygbag
 
 STAPEN-pygame
-- Maak pygame venster
-- Maak achtergrond
+- Maak pygame venster #
+- Maak achtergrond #
 - Maak button
+- plaats tekst
+- ga naar andere pagina
 - Importeer mp3 bestanden
 - Button en mp3 linken
 - RUN
-- Werkt het? ja Geef het cadeau Nee verbeter het!
+- Werkt het? ja ga door met pygbag Nee verbeter het!
 
 STAPPEN-PYGBAG
 - Zoek nog eens informatie op
 - Importeer pygbag
 - Zorg dat het werkt
 - RUN
-- Werkt het? ja Geef het cadau Nee verbeter het!
+- Werkt het? ja Geef het cadeau Nee verbeter het!
 
 
 
