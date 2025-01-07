@@ -1,6 +1,7 @@
 import pygame
 import sys
 import time
+import asyncio
 pygame.init()
 pygame.mixer.init()
 
@@ -62,54 +63,58 @@ sound1 = pygame.mixer.Sound("er_is_er_een_jarig.mp3")
 sound2 = pygame.mixer.Sound("gefeliciteerd.mp3")
 sound3 = pygame.mixer.Sound("lang_zal_hij_leven.mp3")
 # main loop en eventhandler
-while True:
-    #cur_pos
-    cur = pygame.mouse.get_pos()
-    for event in pygame.event.get():     
-        # Controleer of de muis op de knop is geklikt         
-        if event.type==pygame.MOUSEBUTTONDOWN: 
-            if knop1.collidepoint(cur):   #muziek
-                sound1.play()
-                time.sleep(26)
-                sound2.play()
-                time.sleep(32)
-                sound3.play()
-                time.sleep(1)
-            if knop2.collidepoint(cur): #afsluiten
-                print("Bedankt voor het luisteren!")
-                quit()
+async def main():
+    while True:
+        #cur_pos
+        cur = pygame.mouse.get_pos()
+        for event in pygame.event.get():     
+            # Controleer of de muis op de knop is geklikt         
+            if event.type==pygame.MOUSEBUTTONDOWN: 
+                if knop1.collidepoint(cur):   #muziek
+                    sound1.play()
+                    time.sleep(26)
+                    sound2.play()
+                    time.sleep(32)
+                    sound3.play()
+                    time.sleep(1)
+                if knop2.collidepoint(cur): #afsluiten
+                    print("Bedankt voor het luisteren!")
+                    quit()
 
-        if event.type ==pygame.MOUSEBUTTONUP:
-            if knop1.collidepoint(cur):  
-                print("Knop play is losgelaten!")
-            if knop2.collidepoint(cur): 
-                print("Knop afsluiten is losgelaten!")
-                    
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
+            if event.type ==pygame.MOUSEBUTTONUP:
+                if knop1.collidepoint(cur):  
+                    print("Knop play is losgelaten!")
+                if knop2.collidepoint(cur): 
+                    print("Knop afsluiten is losgelaten!")
+                        
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
 
-    # Teken achtergrond
-    scherm.blit(achtergrond, (0, 0))
-    tekst(scherm, "gefeliciteerd", scherm_breete // 2, 330, zwart) 
-    # Teken de knoppen
+        # Teken achtergrond
+        scherm.blit(achtergrond, (0, 0))
+        tekst(scherm, "gefeliciteerd", scherm_breete // 2, 330, zwart) 
+        # Teken de knoppen
 
-         
-        #knop1
-    if (scherm_breete - 150) // 2 < cur[0] < (scherm_breete - 150) // 2 + 150 and 400 < cur[1] < 400 + 50:
+            
+            #knop1
+        if (scherm_breete - 150) // 2 < cur[0] < (scherm_breete - 150) // 2 + 150 and 400 < cur[1] < 400 + 50:
 
-        knop1=teken_knop(scherm, "Play", (scherm_breete - 150) // 2, 400, 150, 50, lichtrood, wit,zwart)
-    else:
-        knop1=teken_knop(scherm, "Play", (scherm_breete - 150) // 2, 400, 150, 50, rood, wit,zwart)
+            knop1=teken_knop(scherm, "Play", (scherm_breete - 150) // 2, 400, 150, 50, lichtrood, wit,zwart)
+        else:
+            knop1=teken_knop(scherm, "Play", (scherm_breete - 150) // 2, 400, 150, 50, rood, wit,zwart)
 
-        #knop 2
-    if (scherm_breete - 150) // 2 < cur[0] < (scherm_breete - 150) // 2 + 150 and 470 < cur[1] < 470 + 50:
-        knop2=teken_knop(scherm, "Afsluiten", (scherm_breete - 150) // 2, 470, 150, 50, lichtrood, wit,zwart)
-    
-    else:
-        knop2=teken_knop(scherm, "Afsluiten", (scherm_breete - 150) // 2, 470, 150, 50, rood, wit,zwart)
-
-
+            #knop 2
+        if (scherm_breete - 150) // 2 < cur[0] < (scherm_breete - 150) // 2 + 150 and 470 < cur[1] < 470 + 50:
+            knop2=teken_knop(scherm, "Afsluiten", (scherm_breete - 150) // 2, 470, 150, 50, lichtrood, wit,zwart)
+        
+        else:
+            knop2=teken_knop(scherm, "Afsluiten", (scherm_breete - 150) // 2, 470, 150, 50, rood, wit,zwart)
 
 
-    pygame.display.update()
+
+
+        pygame.display.update()
+        await asyncio.sleep(0)
+        
+asyncio.run(main())
