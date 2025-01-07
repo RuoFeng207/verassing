@@ -1,9 +1,8 @@
 import pygame
 import sys
-import time
 import asyncio
 pygame.init()
-pygame.mixer.init()
+pygame.mixer.init()  
 
 
 
@@ -55,31 +54,36 @@ scherm_breete = 600
 scherm = pygame.display.set_mode((scherm_breete, scherm_hoogte))
 pygame.display.set_caption("Verjaardag")
 
-# achtergrond laden
-achtergrond = pygame.image.load("party_background.jpg")
-achtergrond = pygame.transform.scale(achtergrond, (600, 600))
+
 # muziek
 sound1 = pygame.mixer.Sound("er_is_er_een_jarig.mp3")
 sound2 = pygame.mixer.Sound("gefeliciteerd.mp3")
 sound3 = pygame.mixer.Sound("lang_zal_hij_leven.mp3")
+
+async def muziek():
+    sound1.play()
+    await asyncio.sleep(26)
+    sound2.play()
+    await asyncio.sleep(32)
+    sound3.play()
+    await asyncio.sleep(1)
+    return sound1,sound2,sound3
 # main loop en eventhandler
 async def main():
     while True:
+        # achtergrond laden
+        achtergrond = pygame.image.load("party_background.jpg")
+        achtergrond = pygame.transform.scale(achtergrond, (600, 600))
         #cur_pos
         cur = pygame.mouse.get_pos()
         for event in pygame.event.get():     
             # Controleer of de muis op de knop is geklikt         
             if event.type==pygame.MOUSEBUTTONDOWN: 
                 if knop1.collidepoint(cur):   #muziek
-                    sound1.play()
-                    time.sleep(26)
-                    sound2.play()
-                    time.sleep(32)
-                    sound3.play()
-                    time.sleep(1)
+                    await muziek()
                 if knop2.collidepoint(cur): #afsluiten
                     print("Bedankt voor het luisteren!")
-                    quit()
+                    sys.exit()
 
             if event.type ==pygame.MOUSEBUTTONUP:
                 if knop1.collidepoint(cur):  
@@ -118,3 +122,4 @@ async def main():
         await asyncio.sleep(0)
         
 asyncio.run(main())
+main()
